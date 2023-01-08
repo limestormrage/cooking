@@ -1,12 +1,19 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import Layout from '../../layout/layout';
+import Main from '../../pages/main/main';
+import './App.css';
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <Layout />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={AppRoute.Main} element={<Layout />}>
+          <Route index element={<Main />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

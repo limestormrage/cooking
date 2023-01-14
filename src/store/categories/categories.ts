@@ -1,10 +1,12 @@
 import { makeAutoObservable, flow } from 'mobx';
 import { TApi } from '../../config/axios/interface';
+import { ICategory } from '../../interfaces';
+import { transformCategories } from '../../utils';
 
 export class CategoriesStore {
   private api: TApi;
 
-  categories: any[] = [];
+  categories: ICategory[] = [];
 
   isLoading = false;
 
@@ -26,7 +28,7 @@ export class CategoriesStore {
 
     if (response.status === 200) {
       const { data } = response;
-      console.log(data.categories);
+      this.categories = data.categories.map(transformCategories);
     } else {
       this.isError = true;
     }
